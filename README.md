@@ -17,10 +17,11 @@ ESP32 (plugged into target PC)
 collect.ps1 writes recon_<date>_<time>.txt in USB MSC Drive (ESP32)
 ```
 1. Plug the ESP32 into the target PC via the USB port.
-2. Press the `BOOT button`.
+2. Press the `BOOT button`. The onboard LED will blink RED 3 times to confirm initialization.
 3. The Run dialog opens automatically, PowerShell launches `collect.ps1`.
-4. Wait around 30 seconds for collection to complete, then unplug.
-5. Plug into your own device, open the `ESP32` drive.
+4. While the automated script is actively executing and harvesting data, the LED will stay a consistent solid BLUE.
+5. Wait for the LED to blink GREEN 3 times. This indicates the script run and file creation is completed. It is now safe to unplug the device.
+6. Plug into your own device, open the `ESP32` drive to view the `recon_<time>_<date>.txt` file.
 
 
 
@@ -141,6 +142,7 @@ Below is a breakdown of the specific system parameters collected during the sequ
   * Local Wi-Fi and Bluetooth connections.
   * Hypervisor switches (VirtualBox Host-Only and VMware VMnet adapters).
   * Active VPN endpoints or userspace tunnels (like Tailscale).
+* **Wireless Credential Harvesting:** Automatically extracts a complete history of all previously connected Wi-Fi networks (SSIDs) along with their corresponding cleartext passwords/security keys saved on the host.
 * **Active Network Sockets:** Aggregates a listing of all open TCP connection sockets, mapping local ports, remote peer IP addresses, and their current connection states (e.g., `LISTEN`, `ESTABLISHED`).
 * **Kernel Routing Tables:** Dumps the host's complete network routing table, detailing destination prefixes, metrics, and interface aliases to outline exactly how the system handles inbound and outbound traffic routing.
 
